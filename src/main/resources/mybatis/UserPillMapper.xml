@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="uz.dori24.dori24.repository.UserPillRepository">
+
+    <insert id="addUserPill" useGeneratedKeys="true" keyProperty="id">
+        insert into user_pill(user_id, pill_name, pill_type, count, refill_count, start_time, interval)
+        values (#{userId}, #{pillName}, #{pillType}::pill_type, #{count}, #{refillCount}, #{startTime}, #{interval})
+    </insert>
+
+    <update id="takePill">
+        UPDATE user_pill
+        set count = count - 1
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserPill">
+        delete from user_pill
+        where id = #{id}
+    </delete>
+
+    <select id="getAllUserPills" resultType="uz.dori24.dori24.entity.response.UserPillResponse">
+        select up.id           as id,
+               up.user_id      as userId,
+               up.pill_name    as pillName,
+               up.pill_type    as pillType,
+               up.count        as count,
+               up.interval        as interval,
+               up.start_time        as startTime,
+        up.refill_count as refillcount
+        from user_pill up
+        where up.user_id = #{userId}
+    </select>
+
+    <select id="getUserPill" resultType="uz.dori24.dori24.entity.response.UserPillResponse">
+        select up.id        as id,
+               up.user_id   as userId,
+               up.pill_name as pillName,
+               up.pill_type as pillType,
+               up.count as count,
+               up.interval        as interval,
+               up.start_time        as startTime,
+               up.refill_count as refillcount
+        from user_pill up
+        where up.id = #{id}
+    </select>
+
+</mapper>

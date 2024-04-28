@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: Dori24
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/dori_24
+    username: postgres
+    password: password
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+mybatis:
+  configuration:
+    return-instance-for-empty-row: false
+    jdbc-type-for-null: null
+    cache-enabled: false
+  mapper-locations: classpath*:/mybatis/*Mapper.xml
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui #  /api/merchant/cabinet -> ni yoziw wart emas yuqorida server.servlet.context-path da yozilgan
+    groups-order: asc
+    operations-sorter: alpha
+    try-it-out-enabled: true
+    tags-sorter: alpha
+    display-request-duration: true
+    doc-expansion: "none"
+  api-docs:
+    path: /docs
