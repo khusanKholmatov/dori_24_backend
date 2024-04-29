@@ -3,8 +3,8 @@
 <mapper namespace="uz.dori24.dori24.repository.UserPillRepository">
 
     <insert id="addUserPill" useGeneratedKeys="true" keyProperty="id">
-        insert into user_pill(user_id, pill_name, pill_type, count, refill_count, start_time, interval)
-        values (#{userId}, #{pillName}, #{pillType}::pill_type, #{count}, #{refillCount}, #{startTime}, #{interval})
+        insert into user_pill(user_id, pill_name, pill_type, count, refill_count, start_time, interval, dosage)
+        values (#{userId}, #{pillName}, #{pillType}::pill_type, #{count}, #{refillCount}, #{startTime}, #{interval}, #{dosage})
     </insert>
 
     <update id="takePill">
@@ -24,6 +24,7 @@
                up.pill_name    as pillName,
                up.pill_type    as pillType,
                up.count        as count,
+               up.dosage        as dosage,
                up.interval        as interval,
                up.start_time        as startTime,
         up.refill_count as refillcount
@@ -37,11 +38,28 @@
                up.pill_name as pillName,
                up.pill_type as pillType,
                up.count as count,
+               up.dosage as dosage,
                up.interval        as interval,
                up.start_time        as startTime,
                up.refill_count as refillcount
         from user_pill up
         where up.id = #{id}
+    </select>
+
+    <select id="getUserPillByNotificationId" resultType="uz.dori24.dori24.entity.response.UserPillResponse">
+        select up.id        as id,
+               up.user_id   as userId,
+               up.pill_name as pillName,
+               up.pill_type as pillType,
+               up.count as count,
+               up.dosage as dosage,
+               up.interval        as interval,
+               up.start_time        as startTime,
+               up.refill_count as refillcount
+        from user_pill up
+        join notification n on up.id = n.user_pill_id
+        where n.id = #{id}
+        limit 1
     </select>
 
 </mapper>

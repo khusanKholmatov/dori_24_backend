@@ -29,8 +29,17 @@ public class UserPillsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserPillResponse> getUserPill(
+            @PathVariable(name = "id") Long pillId
     ) {
-        var res = userPillService.getUserPill(1L);
+        var res = userPillService.getUserPill(pillId);
+        return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("/notification/{id}")
+    public ResponseEntity<UserPillResponse> getUserPillByNotificationId(
+            @PathVariable(name = "id") Long notificationId
+    ) {
+        var res = userPillService.getUserPillByNotificationId(notificationId);
         return ResponseEntity.ok(res);
     }
 
@@ -46,15 +55,16 @@ public class UserPillsController {
     public ResponseEntity<Long> addUserPill(
             @RequestBody UserPillCreateRequest request
     ) {
+        log.info("[POST] call to /user-pill/add with request body {}", request.toString());
         var res = userPillService.addUserPill(request);
         return ResponseEntity.ok(res);
     }
 
     @PutMapping("/take-pill/{id}")
-    public ResponseEntity<Boolean> takePill(
-            @PathVariable(name = "id") Long id
+    public ResponseEntity<UserPillResponse> takePill(
+            @PathVariable(name = "id") Long notificationId
     ) {
-        var res = userPillService.takePill(id);
+        var res = userPillService.takePill(notificationId);
         return ResponseEntity.ok(res);
     }
 }

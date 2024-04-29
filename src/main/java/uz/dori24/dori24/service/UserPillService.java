@@ -15,5 +15,7 @@ public interface UserPillService {
 
     Long addUserPill(UserPillCreateRequest request);
 
-    Boolean takePill(Long id);
+    UserPillResponse takePill(Long id);
+
+    UserPillResponse getUserPillByNotificationId(Long notificationId);
 }

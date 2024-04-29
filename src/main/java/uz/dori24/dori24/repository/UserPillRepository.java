@@ -12,11 +12,13 @@ import java.util.Optional;
 public interface UserPillRepository {
     List<UserPillResponse> getAllUserPills(Long staticUserId);
 
-    Optional<UserPillResponse> getUserPill(Long id);
+    Optional<UserPillResponse> getUserPill(Long pillId);
 
     void deleteUserPill(Long id);
 
     void addUserPill(UserPillCreateRequest request);
 
     void takePill(Long id);
+
+    Optional<UserPillResponse> getUserPillByNotificationId(Long notificationId);
 }

@@ -30,3 +30,10 @@ springdoc:
     doc-expansion: "none"
   api-docs:
     path: /docs
+
+app:
+  conf:
+    rabbit-mq:
+      exchange: common
+      notification-routing-key: merchant.kassa.routing.key
+      notification-queue: merchant-kassa-queue

@@ -17,6 +17,7 @@ public class UserPillResponse {
     private String pillName;
     private PillType pillType;
     private Long count;
+    private Long dosage;
     private Long refillCount;
     private String startTime;
     private Long interval;

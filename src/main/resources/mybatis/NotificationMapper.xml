@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="uz.dori24.dori24.repository.NotificationRepository">
 
+    <insert id="addUserPillNotification" useGeneratedKeys="true" keyProperty="notificationId">
+        insert into notification(user_pill_id, title, body, payload, created_date)
+        values (#{userPillId}, #{title}, #{body}, #{payload}, current_timestamp)
+    </insert>
 
+    <delete id="deleteNotificationsByUserPillId">
+        delete from notification
+        where user_pill_id = #{id}
+    </delete>
+
+    <select id="getNotificationById" resultType="uz.dori24.dori24.entity.response.NotificationResponse">
+        select
+            n.id as id,
+            n.user_pill_id as userPillId,
+            n.title as title,
+            n.body as body,
+            n.payload as payload
+        from notification n
+        where n.id = #{notificationId}
+    </select>
 
 </mapper>

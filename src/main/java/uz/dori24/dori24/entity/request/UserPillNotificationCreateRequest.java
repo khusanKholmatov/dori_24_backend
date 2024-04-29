@@ -8,34 +8,26 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.dori24.dori24.enums.PillType;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserPillCreateRequest {
+public class UserPillNotificationCreateRequest {
 
     @JsonIgnore
-    private Long id;
-    @NotNull
-    @Positive
-    private Long userId;
+    private Long notificationId;
     @NotNull
     @NotBlank
-    private String pillName;
+    private String payload;
     @NotNull
     @NotBlank
-    private String startTime;
+    private String body;
     @NotNull
-    private PillType pillType;
+    @NotBlank
+    private String title;
+    @NotNull
     @Positive
-    private Long interval;
-    @Positive
-    private Long count;
-    @Positive
-    private Long refillCount;
-    @Positive
-    private Long dosage;
+    private Long userPillId;
 
 }
